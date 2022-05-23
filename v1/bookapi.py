@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-from fastapi import FastAPI, Header, HTTPException
-from typing import Optional, Union
 from pydantic import BaseModel
+from fastapi import FastAPI, Header, HTTPException, status
+from typing import Union, Optional
 
 app = FastAPI()
 
@@ -21,7 +21,6 @@ class UpdateBook(BaseModel):
     author: Optional[str] = None
     year: Optional[str] = None
 
-
 @app.get("/")
 async def index():
     return books
@@ -33,7 +32,7 @@ async def get_book(book_id: int = Header()):
     
     raise HTTPException(status_code=404, detail="Book not found")
 
-@app.post("/create-book/{book_id}")
+@app.post("/create-book/{book_id}", status_code=status.HTTP_201_CREATED)
 async def create_book(book_id: int = Header(), book: Union[Book, None] = None):
     if book_id in books:
         raise HTTPException(status_code=400, detail="Book Already Exists")
@@ -67,4 +66,3 @@ async def delete_book(book_id: int = Header()):
     
     del books[book_id]
     return {"Message": "book Deleted Succesfully"}
-

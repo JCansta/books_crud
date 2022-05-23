@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from fastapi.testclient import TestClient
-from .bookapi import app
+from ..v1.bookapi import app
 
 client = TestClient(app)
 
@@ -10,7 +10,7 @@ def test_create_bookapi():
         '/create-book/1',
         json={"name": "Hola", "pages": 20, "author": "Mundo", "year": "2022"}
     )
-    assert response.status_code == 200
+    assert response.status_code == 201
     assert response.json() == {
         "name": "Hola",
         "pages": 20,
