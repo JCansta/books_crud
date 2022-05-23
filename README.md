@@ -42,7 +42,7 @@ python3 main.py
 ```
 But you can also start the project using the uvicorn command to the bookapi.py file directly
 ```bash
-uvicorn bookapi:app --reload
+uvicorn v1/bookapi:app --reload
 ```
 ## Enter to the FASTAPI Docs
 Once the project has started, you can access its documentation with the following link [Docs](http://127.0.0.1:8000/docs)
@@ -56,5 +56,5 @@ $ pip install pytest
 ```
 after install pytest, you can test the file using the following command on test_bookapi.py
 ```bash
-$ pytest test_bookapi.py
+$ pytest tests/test_bookapi.py
 ```
